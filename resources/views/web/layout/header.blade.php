@@ -21,7 +21,7 @@
                                 <i class="fa fa-angle-down"></i></a>
                             <ul style="display: none" class="sub-menu">
                                 @foreach($category->children as $children)
-                                    <li><a href="@if($category->href) {{$category->href}} @else /?category={{ $category->id }} @endif" @if($category->target) target="_blank" @endif>{{ $children->name }}</a></li>
+                                    <li><a href="@if($children->href) {{$children->href}} @else /?category={{ $children->id }} @endif" @if($children->target) target="_blank" @endif>{{ $children->name }}</a></li>
                                 @endforeach
                             </ul>
                         </li>
