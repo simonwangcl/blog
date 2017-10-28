@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Helper\Qq\QqSessionHelper;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Web\BaseController;
 
@@ -10,9 +9,6 @@ use App\Model\TagModel;
 use App\Model\CategoryModel;
 use App\Model\ArticleModel;
 use App\Model\ArticleTagRelationModel;
-use App\Helper\CategoryHelper;
-use App\Helper\ArticleHelper;
-use App\Helper\TagHelper;
 
 class IndexController extends BaseController
 {
@@ -57,7 +53,7 @@ class IndexController extends BaseController
         $articles = $articles->select('id', 'user_id', 'category_id', 'title', 'sketch', 'cover', 'count', 'sticky', 'state', 'created_at');
         $articles = $articles->withCount(['comments', 'points' => function($query){
             $query->where('state', 1);
-        }])->with('author', 'tags', 'category')->orderBy('id', 'desc')->paginate(10);
+        }])->with('author', 'tags', 'category')->orderBy('id', 'desc')->paginate(5);
         if($articles->count()){
             foreach ($articles as &$article) {
                 $article->author = $article->author->name;
